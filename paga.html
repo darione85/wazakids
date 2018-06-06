@@ -1,0 +1,13 @@
+<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><input name="cmd" type="hidden" value="_xclick"><br>
+    <input name="currency_code" type="hidden" value="EUR"><br>
+    <input name="lc" type="hidden" value="IT"><br>
+    <input name="item_name" type="hidden" value="Atleta figmma"><br>
+    <input ng-repeat="iscritto in arrayIscritti" type="hidden" name="{{translateFigmma(iscritto.figmma)}}" value="{{iscritto.name+','+iscritto.surname}}">
+    <input name="amount" type="hidden" value="{{sum()}}"><br>
+    <input name="notify_url" type="hidden" value=""><br>
+    <input name="business" type="hidden" value="teamwaza@hotmail.it"><br>
+    <input type="submit" value="Pagamento iscrizione affiliati Figmma">
+    <input TYPE="hidden" NAME="return" value="URLspecificToThisTransaction">
+</form>
+
+<div ng-click="save()">salva</div>

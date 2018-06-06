@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body ng-app="iscrizione" ng-controller="iscrizioneController">
+<h3>{{title}}</h3>
+
+<div id="wizard-step-container">
+    <ul class="nav nav-pills nav-justified ">
+        <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}">
+            <a ng-click="gotoStep(step.step)" href="">{{step.step}}. {{step.name}}</a>
+        </li>
+    </ul>
+</div>
+
+<div id="wizard-content-container" class="jumbotron">
+
+    <ng-include src="getStepTemplate()"></ng-include>
+</div>
+
+<div class="modal-footer">
+    <!--<button class="btn btn-warning" type="button" ng-click="closePopup()">Cancel</button>-->
+    <button ng-disabled="currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="gotoStep(currentStep - 1)"><i class="fa fa-arrow-left"></i> Previous step</button>
+    <button ng-disabled="currentStep >= steps.length" class="btn btn-primary" name="next" type="button" ng-click="gotoStep(currentStep + 1)">Next step <i class="fa fa-arrow-right"></i></button>
+
+</div>
+</body>
+<script src="node_modules/directus-sdk-javascript/dist/remote.js"></script>
+
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/angular/angular.min.js"></script>
+
+<script src="js/script.js"></script>
+</html>

@@ -1,0 +1,17 @@
+<div ng-repeat="iscritto in arrayIscritti track by $index">
+    <p>Atleta numero {{$index}}</p>
+    <p >{{iscritto.name}}</p>
+    <p >{{iscritto.surname}}</p>
+    <p >{{iscritto.gender}}</p>
+    <p>{{iscritto.figmma}}</p>
+    <p >{{iscritto.age}}</p>
+    <p >{{iscritto.weight}}</p>
+    <p >{{iscritto.categoria}}</p>
+    <p >{{iscritto.weightClass}}</p>
+    <p >{{iscritto.societa}}</p>
+    <p >{{iscritto.mail}}</p>
+</div>
+
+<p>Totale da pagare : {{sum()}}</p>
+
+<!--http://directus.karuweb.it/api/1.1/tables/atleti/rows-->
