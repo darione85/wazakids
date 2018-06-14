@@ -1,21 +1,100 @@
 
 
-<div ng-repeat="iscritto in arrayIscritti track by $index">
-    <p>Atleta numero {{$index}}</p>
-    <input type="text" ng-model="iscritto.name">
-    <input type="text" ng-model="iscritto.surname">
-    <select ng-model="iscritto.gender">
-        <option value="male">Maschio</option>
-        <option value="female">Femmina</option>
-    </select>
-    <select ng-model="iscritto.figmma">
-        <option value="10">Figmma</option>
-        <option value="15">Non iscritto Figmma</option>
-    </select>
-    <input type="number" ng-model="iscritto.age" >
-    <input type="number" ng-model="iscritto.weight" ng-change="getCategory(iscritto)">
-    <input type="text" ng-model="iscritto.societa">
-    <input type="text" ng-model="iscritto.mail">
+<div ng-repeat="iscritto in arrayIscritti track by $index" >
+    <h3 class="text-center">Atleta numero <span class="badge">{{$index}}</span></h3>
+    <div class="row d-flex h">
+        <div class="col-sm-6">
+            <div class="form-group label-floating">
+                <input class="form-control" type="text" ng-model="iscritto.name">
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Nome <small>(required)</small></label>
+
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group label-floating">
+                <input class="form-control" type="text" ng-model="iscritto.surname" >
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Cognome <small></small></label>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex h">
+        <div class="col-sm-6 ">
+            <div class="form-group label-floating d-flex c">
+                <select ng-model="iscritto.gender" class="form-control">
+                    <option value="male">Maschio</option>
+                    <option value="female">Femmina</option>
+                </select>
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Gender<small></small></label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group label-floating d-flex c">
+                <select ng-model="iscritto.figmma" class="form-control">
+                    <option value="10">Figmma</option>
+                    <option value="15">Non iscritto Figmma</option>
+                </select>
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Iscrizione Federazione<small></small></label>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex h">
+
+
+        <div class="col-sm-4">
+            <div class="form-group label-floating">
+                <input class="form-control" type="number" ng-model="iscritto.age" >
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Età<small></small></label>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="form-group label-floating">
+                <input class="form-control" type="number" ng-model="iscritto.weight" ng-change="getCategory(iscritto)">
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Peso<small></small></label>
+            </div>
+        </div>
+    </div>
+    <div class="row d-flex h">
+        <div class="col-sm-6">
+            <div class="form-group label-floating">
+                <input class="form-control" type="text" ng-model="iscritto.societa">
+                <span class="highlight"></span>
+                <div class="bar"></div>
+                <label class="control-label">Società iscrizione/provenienza<small></small></label>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="input-group d-flex ">
+                <span class="input-group-addon">
+                    <i class="material-icons">email</i>
+                </span>
+                <div class="form-group label-floating">
+                    <input class="form-control" type="text" ng-model="iscritto.mail">
+                    <span class="highlight"></span>
+                    <div class="bar"></div>
+                    <label class="control-label">Email<small></small></label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+
+
 </div>
 
 

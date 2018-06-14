@@ -5,32 +5,89 @@
     <title>Title</title>
 
 </head>
+
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+<meta name="viewport" content="width=device-width" />
+
+
+<link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png" />
+<link rel="icon" type="image/png" href="assets/img/favicon.png" />
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+<!--<script src="assets/js/material-bootstrap-wizard.js"></script>-->
+<!--<script src="js/js.js"></script>-->
+
+<!--     Fonts and icons     -->
+<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:400,700|Material+Icons" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
+<!-- CSS Files -->
+<!--<link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" />-->
+<!--<link href="assets/css/material-bootstrap-wizard.css" rel="stylesheet" />-->
+
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<!--<link href="assets/css/demo.css" rel="stylesheet" />-->
+<link href="assets/css/css.css" rel="stylesheet" />
+
+
+
 <body ng-app="iscrizione" ng-controller="iscrizioneController">
-<h3>{{title}}</h3>
 
-<div id="wizard-step-container">
-    <ul class="nav nav-pills nav-justified ">
-        <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}">
-            <a ng-click="gotoStep(step.step)" href="">{{step.step}}. {{step.name}}</a>
-        </li>
-    </ul>
+
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <!-- Wizard container -->
+            <div class="wizard-container">
+                <div class="card wizard-card" data-color="purple" id="wizard">
+                    <form action="" method="" >
+                        <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
+
+                        <div class="wizard-header">
+                            <h3 class="wizard-title">Wizard {{title}} </h3>
+                            <h5> scrizione atleta </h5>
+                        </div>
+                        <div class="wizard-navigation">
+                            <ul class="nav nav-pills d-flex h">
+                                <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}" >
+                                    <a ng-click="gotoStep(step.step)" href="" >{{step.step}}. {{step.name}}</a>
+                                </li>
+                            </li>
+                        </ul>
+
+                        </div>
+                        <div id="wizard-content-container " class="jumbotron">
+                            <ng-include src="getStepTemplate()"></ng-include>
+                        </div>
+
+                    </form>
+                    <div class="wizard-footer">
+                        <div class="modal-footer d-flex h">
+                            <!--<button class="btn btn-warning" type="button" ng-click="closePopup()">Cancel</button>-->
+                            <button ng-disabled="currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="gotoStep(currentStep - 1)">
+                                <i class="fa fa-arrow-left"></i> Previous step
+                            </button>
+                            <button ng-disabled="currentStep >= steps.length" class="btn btn-primary" name="next" type="button" ng-click="gotoStep(currentStep + 1)">
+                                Next step <i class="fa fa-arrow-right"></i>
+                            </button>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
-<div id="wizard-content-container" class="jumbotron">
 
-    <ng-include src="getStepTemplate()"></ng-include>
-</div>
-
-<div class="modal-footer">
-    <!--<button class="btn btn-warning" type="button" ng-click="closePopup()">Cancel</button>-->
-    <button ng-disabled="currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="gotoStep(currentStep - 1)"><i class="fa fa-arrow-left"></i> Previous step</button>
-    <button ng-disabled="currentStep >= steps.length" class="btn btn-primary" name="next" type="button" ng-click="gotoStep(currentStep + 1)">Next step <i class="fa fa-arrow-right"></i></button>
-
-</div>
 </body>
+
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>-->
 <script src="node_modules/directus-sdk-javascript/dist/remote.js"></script>
 
-<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<!--<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>-->
 <script src="node_modules/angular/angular.min.js"></script>
 
 <script src="js/script.js"></script>
