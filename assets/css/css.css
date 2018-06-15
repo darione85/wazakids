@@ -384,7 +384,8 @@ input:not([value=""]):not(.input_search):disabled + label {
 
 .wizard-container {
   max-width: 90%;
-  margin: auto; }
+  margin: auto;
+  padding-bottom: 5em; }
 
 .wizard-footer {
   /* margin: 3em; */
