@@ -1,7 +1,6 @@
 /*! Generated using Type Nugget v0.2.6 | typenugget.com */
 /*! Import Foundry Fonts */
 @import url("https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700");
-@import url("https://fonts.googleapis.com/css?family=Work+Sans : 100,200,300,400,500,600,700,800,900");
 /*
 
 @import "../../node_modules/bootstrap/scss/functions";
@@ -173,7 +172,7 @@ textarea {
 /*! Start Type Nugget Styles */
 body {
   background-color: #31ed82;
-  font-family: 'Work Sans';
+  font-family: 'Poppins';
   font-size: 17px;
   color: #091254;
   line-height: 1.735; }
@@ -274,6 +273,9 @@ input, select {
   font-size: 2em;
   background: transparent;
   transition: all 0.1s ease-in-out; }
+  input.form-control[type="number"], select.form-control[type="number"] {
+    max-width: 150px;
+    text-align: center; }
 
 label {
   bottom: 10px;
@@ -376,6 +378,10 @@ input:not([value=""]):not(.input_search):disabled + label {
 .c {
   flex-direction: column; }
 
+.left {
+  justify-content: flex-start;
+  align-items: flex-start; }
+
 .wizard-container {
   max-width: 90%;
   margin: auto; }
@@ -393,26 +399,65 @@ input:not([value=""]):not(.input_search):disabled + label {
 
 li {
   margin: 1em;
-  list-style: none; }
-
-li, li.active {
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275); }
-
-li.active {
-  background: #091254;
-  padding: 10px;
-  font-size: 120%;
-  box-shadow: 0 3px 10px #091254;
-  border-radius: 5px; }
-
-li a {
+  list-style: none;
+  line-height: 1;
   text-align: center; }
+  li.active {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+    background: #091254;
+    padding: 10px;
+    font-size: 120%;
+    box-shadow: inset 0 0 50px 10px #070d3d;
+    box-shadow: 0 3px 10px #091254;
+    border-radius: 5px; }
+    li.active a {
+      color: #31ed82; }
 
-li.active a {
-  color: #eee; }
+.riepilogo h4 {
+  margin-left: 1em; }
 
 .material-icons {
   font-size: 3em;
   padding-right: 10px; }
+
+.d-flex.h > .d-flex.c {
+  padding: 1em 3em; }
+  .d-flex.h > .d-flex.c > h4 {
+    margin-top: 0; }
+
+.badge {
+  min-width: 50px;
+  min-height: 50px;
+  background-color: #091254;
+  color: #31ed82;
+  text-align: center;
+  padding: 10px;
+  border-radius: 50%;
+  line-height: 0;
+  transform: scale(1.2);
+  margin-left: 2em;
+  overflow: hidden;
+  letter-spacing: 0;
+  line-height: 0;
+  display: inline-flex;
+  width: 50px;
+  height: 50px;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  align-items: center; }
+
+button {
+  background: #091254;
+  border: 0;
+  padding: 1em 2em;
+  font-size: 2em;
+  color: #31ed82;
+  box-shadow: inset 0 0 50px 10px #070d3d;
+  border-radius: 20px; }
+  button:hover, button:focus {
+    transform: scale(1.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+    background-color: #0e1c82; }
 
 /*# sourceMappingURL=css.css.map */

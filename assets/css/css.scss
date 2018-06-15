@@ -2,7 +2,7 @@
 /*! Import Foundry Fonts */
 
 @import url('https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700');
-@import url('https://fonts.googleapis.com/css?family=Work+Sans : 100,200,300,400,500,600,700,800,900');
+//@import url('https://fonts.googleapis.com/css?family=Work+Sans : 100,200,300,400,500,600,700,800,900');
 
 
 //$path_bootstrap: '../../node_modules/bootstrap/scss';
@@ -52,7 +52,7 @@ $color_06: #ff0000;
 
 body {
   background-color: $color_01;
-  font-family: 'Work Sans';
+  font-family: 'Poppins';
   font-size: 17px;
   color: $color_02;
   line-height: 1.735;
@@ -178,6 +178,10 @@ input, select {
   background: transparent;
   transition: all 0.1s ease-in-out;
   //border-bottom: 1px dotted $color_05;
+  &.form-control[type="number"] {
+    max-width: 150px;
+    text-align: center;
+  }
 }
 
 label {
@@ -292,8 +296,12 @@ input:not([value=""]):not(.input_search) {
   align-items: center;
 
 }
-.h {flex-direction: row; justify-content: space-around;}
+.h {
+  flex-direction: row;
+  justify-content: space-around;
+}
 .c {flex-direction: column;}
+.left {justify-content: flex-start; align-items: flex-start;}
 
 
 
@@ -314,25 +322,70 @@ input:not([value=""]):not(.input_search) {
 }
 
 
-li {margin:1em; list-style: none; }
-li,li.active {
-  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);;
+li {
+  margin: 1em;
+  list-style: none;
+  line-height: 1;
+  text-align: center;
+  &.active {
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+    background: $color_02;
+    padding: 10px;
+    font-size: 120%;
+    box-shadow: inset 0 0 50px 10px darken($color_02,5%);
+    box-shadow: 0 3px 10px $color_02;
+    border-radius: 5px;
+    a {
+      color: $color_01;
+    }
+
+  }
 }
 
-li.active {
-  background: $color_02;
-  padding: 10px;
-  font-size: 120%;
-  box-shadow: 0 3px 10px $color_02;
-  border-radius:5px;
 
-}
-li a {text-align: center;}
-li.active a {color: $white; }
-
-
-
+.riepilogo h4 {margin-left: 1em;}
 .material-icons {
   font-size: 3em;
   padding-right: 10px;
+}
+.d-flex.h>.d-flex.c{
+  padding: 1em 3em;
+  &>h4 {margin-top: 0;}
+}
+.badge {
+  $badge:50px;
+  min-width:$badge;
+  min-height: $badge;
+  background-color: $color_02;
+  color:$color_01;
+  text-align: center;
+  padding:10px; border-radius: 50%; line-height: 0;
+  transform: scale(1.2);
+  margin-left:2em;
+  overflow: hidden;
+  letter-spacing: 0;
+  line-height: 0;
+  display: inline-flex;
+  width: $badge;
+  height: $badge;
+  vertical-align: middle;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+button {
+  background: $color_02;
+  border: 0;
+  padding: 1em 2em;
+  font-size: 2em;
+  color: $color_01;
+  box-shadow: inset 0 0 50px 10px darken($color_02,5%);
+  border-radius: 20px;
+  &:hover, &:focus {
+    transform: scale(1.2);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+    background-color: lighten($color_02,10%);
+  }
 }
