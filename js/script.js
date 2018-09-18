@@ -82,7 +82,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
     var ServerUrl = "http://directus.karuweb.it/api/1.1/";
     var CockpitServerUrl = "http://directus.karuweb.it/api/1.1/";
-    var customServerUrl ="http://backend.wazakids.it";
+    var customServerUrl ="http://backend.wazakids.it/api/";
 
     function buildURL(url) {
         var ret = ServerUrl + url;
@@ -191,13 +191,13 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         },
 
         saveCustom:function(arrayOfAthlete){
-            if(arrayOfAthlete.length>1){
+            if(arrayOfAthlete.length>=1){
                 var obj={};
                 obj.rows = arrayOfAthlete;
                 return this.postToCustom('?saveiscritti',obj);
-            }else{
-                return this.postToCustom('tables/atleti/rows',arrayOfAthlete[0]);
             }
+
+            
         },
         saveCockpit:function (arrayOfAthlete) {
             if(arrayOfAthlete.length>1){
@@ -210,7 +210,8 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         },
 
         save:function (arrayOfAthlete) {
-            return this.saveDirectus(arrayOfAthlete);
+            console.log(arrayOfAthlete);
+            return this.saveCustom(arrayOfAthlete);
         }
 
     }
@@ -325,8 +326,8 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
         },
         {
             step: 5,
-            name: "Chart",
-            template: "apps/webgis/js/component/laminazione/step/chart.html"
+            name: "Conferma",
+            template: "conferma.html"
         },
     ];
 
