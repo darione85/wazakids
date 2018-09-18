@@ -75,13 +75,27 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         categoria:"",
         peso_categoria:"",
         gender:"male",
-        weight:65
+        weight:65,
+        idpagamento:"id"
     };
+    // create table iscritti(active integer,name varchar(20),surname varchar(20),mail varchar(30),societa varchar(20), figmma integer, age integer, categoria varchar(30),peso_categoria varchar(30), gender varchar(20),weight integer, idpagamento varchar(50));
 
     var ServerUrl = "http://directus.karuweb.it/api/1.1/";
+    var CockpitServerUrl = "http://directus.karuweb.it/api/1.1/";
+    var customServerUrl ="http://backend.wazakids.it";
 
     function buildURL(url) {
         var ret = ServerUrl + url;
+        return ret
+    }
+
+    function buildCockpitURL(url) {
+        var ret = CockpitServerUrl + url;
+        return ret
+    }
+
+    function buildCustomURL(url) {
+        var ret = customServerUrl + url;
         return ret
     }
 
@@ -106,7 +120,29 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
                 })
         },
 
-        save:function (arrayOfAthlete){
+        postToCockpit:function(url,obj){
+            return $http
+                .post(buildCockpitURL(url),obj)
+                .then(function (res) {
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        postToCustom:function(url,obj){
+            return $http
+                .post(buildCustomURL(url),obj)
+                .then(function (res) {
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        saveDirectus:function (arrayOfAthlete){
 
             if(arrayOfAthlete.length>1){
                 var obj={};
@@ -152,7 +188,31 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             //     .catch(function (res) {
             //         console.log(res)
             //     });
+        },
+
+        saveCustom:function(arrayOfAthlete){
+            if(arrayOfAthlete.length>1){
+                var obj={};
+                obj.rows = arrayOfAthlete;
+                return this.postToCustom('?saveiscritti',obj);
+            }else{
+                return this.postToCustom('tables/atleti/rows',arrayOfAthlete[0]);
+            }
+        },
+        saveCockpit:function (arrayOfAthlete) {
+            if(arrayOfAthlete.length>1){
+                var obj={};
+                obj.rows = arrayOfAthlete;
+                return this.postToCockpit('tables/atleti/rows/bulk',obj);
+            }else{
+                return this.postToCockpit('tables/atleti/rows',arrayOfAthlete[0]);
+            }
+        },
+
+        save:function (arrayOfAthlete) {
+            return this.saveDirectus(arrayOfAthlete);
         }
+
     }
 
 
