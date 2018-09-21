@@ -69,7 +69,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         name:"nome",
         surname:"cognome",
         mail:"pluto@pluto.it",
-        società:"WAZA",
+        societa:"WAZA",
         figmma:15,
         age:15,
         categoria:"",
@@ -132,6 +132,8 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         },
 
         postToCustom:function(url,obj){
+            console.log(buildCustomURL(url));
+
             return $http
                 .post(buildCustomURL(url),obj)
                 .then(function (res) {
@@ -194,7 +196,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             if(arrayOfAthlete.length>=1){
                 var obj={};
                 obj.rows = arrayOfAthlete;
-                return this.postToCustom('?saveiscritti',obj);
+                return this.postToCustom('saveiscritti.php',obj);
             }
 
             
