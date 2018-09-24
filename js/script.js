@@ -99,7 +99,23 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         return ret
     }
 
+    function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+      }
+
+    var guid = guid();
+
+
     return{
+
+        guid:function(){
+            return guid;
+        },
 
         categorie:function () {
           return categorie;
@@ -213,6 +229,9 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
         save:function (arrayOfAthlete) {
             console.log(arrayOfAthlete);
+            arrayOfAthlete.forEach(function(item){
+                item.idpagamento = guid;
+            })
             return this.saveCustom(arrayOfAthlete);
         }
 
@@ -223,7 +242,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
 });
 
-iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',function ($scope,iscrizioneService) {
+iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$document',function ($scope,iscrizioneService, $document) {
 
     var jsonCategorie = iscrizioneService.categorie();
 
@@ -236,6 +255,14 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
         return new Array(num);
     }
 
+    if(window.location.href.indexOf('guid')>-1){
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var c = url.searchParams.get("guid");
+        console.log(c);
+        console.log("vai a pagata o a controllare");
+    }
+
     var exampleSubscriber = iscrizioneService.exampleOfIscritto();
 
     // iscrizioneService.save(exampleSubscriber);
@@ -244,11 +271,14 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
     $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
 
     $scope.buildArrayIscritti = function () {
+        console.log("build array of iscritti: "+$scope.number);
         $scope.arrayIscritti = [];
         for(var i = 0;i<= $scope.number;i++){
             $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
         }
     };
+
+    $scope.guid = iscrizioneService.guid();
 
     $scope.sum = function () {
         var toPay=0;
@@ -299,6 +329,8 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
         iscrizioneService.save($scope.arrayIscritti)
             .then(function (data) {
                 console.log(data);
+                console.log($document.getElementById("#payForm"))
+                //$document.getElementById("#payForm").submit();
             })
             .catch(function (data) {
                 console.log(data);
@@ -335,6 +367,8 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
 
 
     $scope.gotoStep = function(newStep) {
+        if (newStep == 2)$scope.buildArrayIscritti();
+
         $scope.currentStep = newStep;
     }
 
