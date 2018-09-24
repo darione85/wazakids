@@ -322,7 +322,9 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
         $scope.arrayIscritti.forEach(function (t) {
             list += t.name+"_"+t.surname+";"
         })
-        return list;
+        return lis
+        à
+        t;
     };
 
     $scope.save= function () {
