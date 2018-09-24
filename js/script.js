@@ -242,7 +242,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
 });
 
-iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$document',function ($scope,iscrizioneService, $document) {
+iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$document','$element',function ($scope,iscrizioneService, $document,$element) {
 
     var jsonCategorie = iscrizioneService.categorie();
 
@@ -366,8 +366,22 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     ];
 
 
+    // $scope.$on('$includeContentLoaded', function() {
+    //     if($scope.currentStep == 4){
+    //         var childFormController = $element.find('#paypalForm').eq(0).controller('form');
+    //         console.log(childFormController);
+    //         childFormController.$setPristine();
+    //     }
+    //
+    //
+    // });
+
+
     $scope.gotoStep = function(newStep) {
         if (newStep == 2)$scope.buildArrayIscritti();
+        if (newStep == 4){
+            console.log($scope.arrayIscritti);
+        }
 
         $scope.currentStep = newStep;
     }
@@ -381,4 +395,15 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     }
 
 }]);
+
+iscrizioneApp.component('paypalForm', {
+    templateUrl: 'paypalForm.html',
+    controller: function(iscrizioneService) {
+
+        this.guid = iscrizioneService.guid();
+    },
+    bindings:{
+        arrayIscritti:'<'
+    }
+});
 

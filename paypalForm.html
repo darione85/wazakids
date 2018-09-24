@@ -1,12 +1,11 @@
 
 <div>
-    <!--<form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr"  method="post">-->
-        <form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr"  method="post">
+    <form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr"  method="post">
         <input name="cmd" type="hidden" value="_xclick"><br>
         <input class="form-control" name="currency_code" type="hidden" value="EUR"><br>
         <input class="form-control" name="lc" type="hidden" value="IT"><br>
         <input class="form-control" name="item_name" type="hidden" value="Atleta figmma"><br>
-        <span ng-repeat="iscritto in arrayIscritti">
+        <span ng-repeat="iscritto in $ctrl.arrayIscritti">
             <input class="form-control" type="hidden" name="{{translateFigmma(iscritto.figmma)}}" value="{{iscritto.name+'-'+iscritto.surname}}">
         </span>
         <input class="form-control" name="amount" type="hidden" value="{{sum()}}"><br>
@@ -18,8 +17,6 @@
 
     <!-- <div class="btn btn-primary" ng-click="save()"><img src="https://www.paypalobjects.com/webstatic/en_US/i/btn/png/btn_buynow_107x26.png" alt="Buy Now" /></div> -->
 </div>
-<!--<div>-->
-    <!--<paypal-form iscritti="arrayIscritti" ></paypal-form>-->
-<!--</div>-->
+
 
 
