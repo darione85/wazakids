@@ -248,7 +248,7 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
 
     $scope.currentStep = 1;
 
-    $scope.number =1;
+    $scope.variable={number:1};
 
     $scope.getNumber = function(num) {
         // if(num ==1)num+1
@@ -271,9 +271,9 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
 
     $scope.buildArrayIscritti = function () {
-        console.log("build array of iscritti: "+$scope.number);
+        console.log("build array of iscritti: "+$scope.variable.number);
         $scope.arrayIscritti = [];
-        for(var i = 0;i<= $scope.number;i++){
+        for(var i = 0;i< $scope.variable.number;i++){
             $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
         }
     };
