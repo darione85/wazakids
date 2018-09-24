@@ -1,0 +1,3 @@
+paypal_ipn_status = RECEIVED FROM LIVE WHILE SANDBOXED
+paypal_ipn_date = 2018-09-18 15:48:30 CEST
+
