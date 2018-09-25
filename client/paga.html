@@ -2,15 +2,17 @@
 <div>
     <!--<form id="paypalForm" action="https://www.paypal.com/cgi-bin/webscr"  method="post">-->
         <form id="paypalForm" action="https://www.sandbox.paypal.com/cgi-bin/webscr" target="_blank"  method="post">
-        <!-- <form id="paypalForm" action="https://ipnpb.sandbox.paypal.com/cgi-bin/webscr"  method="post"> -->
-        <input name="cmd" type="hidden" value="_xclick"><br>
+        <!-- <input name="cmd" type="hidden" value="_xclick"><br> -->
+        <input name="cmd" type="hidden" value="_cart"><br>
+        <input type="hidden" name="upload" value="1">
         <input class="form-control" name="currency_code" type="hidden" value="EUR"><br>
         <input class="form-control" name="lc" type="hidden" value="IT"><br>
-        <input class="form-control" name="item_name" type="hidden" value="Atleti {{arrayIscritti.length}}"><br>
+        <!-- <input class="form-control" name="item_name" type="hidden" value="Atleti {{arrayIscritti.length}}"><br> -->
         <span ng-repeat="iscritto in arrayIscritti">
-            <input class="form-control" type="hidden" name="item_name{{$index}}" value="{{iscritto.name+'-'+iscritto.surname+'_'+iscritto.figmma}}">
-        </span>
-        <input class="form-control" name="amount" type="hidden" value="{{sum()}}"><br>
+            <input class="form-control" type="hidden" name="item_name_{{$index+1}}" value="{{iscritto.name+'-'+iscritto.surname}}">
+            <input class="form-control" type="hidden" name="amount_{{$index+1}}" value="{{iscritto.figmma}}">
+        </span>        
+        <!-- <input class="form-control" name="amount" type="hidden" value="{{sum()}}"><br> -->
         <input class="form-control" name="notify_url" type="hidden" value="http://backend.wazakids.it/api/ipn.php"><br>
         <input class="form-control" name="business" type="hidden" value="teamwaza@hotmail.it"><br>
         <input class="form-control" type="submit" name="submit" value="Pagamento iscrizione affiliati Figmma">

@@ -5,7 +5,7 @@ define("DB","waza.db");
 
 function queryBuilder($query, $func){
 	$db = new SQLite3(DB);
-    echo $query;
+    //echo $query;
 	$results = $db->query($query);
 
 	if($func){

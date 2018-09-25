@@ -125,6 +125,8 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             return exampleSubscriber;
         },
 
+        
+
         post:function (url,obj) {
             return $http
                 .post(buildURL(url),obj)
@@ -140,6 +142,18 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             return $http
                 .post(buildCockpitURL(url),obj)
                 .then(function (res) {
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        getCustom:function (url) {
+            return $http
+                .get(buildCustomURL(url))
+                .then(function (res) {
+                    console.log(res)
                     return res.data;
                 })
                 .catch(function (res) {
@@ -213,10 +227,9 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
                 var obj={};
                 obj.rows = arrayOfAthlete;
                 return this.postToCustom('saveiscritti.php',obj);
-            }
-
-            
+            }  
         },
+
         saveCockpit:function (arrayOfAthlete) {
             if(arrayOfAthlete.length>1){
                 var obj={};
@@ -255,14 +268,26 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
         return new Array(num);
     }
 
+    $scope.getIscrittiByGuid = function(confirmGuid){
+        iscrizioneService.getCustom("getiscritti.php?guid="+confirmGuid)
+        .then(function(data){
+            $scope.gotoStep(5);
+            console.log(data);
+            $scope.confirmedAthlete = data.iscritti;
+        })
+    }
+
     if(window.location.href.indexOf('guid')>-1){
         var url_string = window.location.href;
         var url = new URL(url_string);
-        var c = url.searchParams.get("guid");
-        console.log(c);
+        var confirmGuid = url.searchParams.get("guid");
+        console.log(confirmGuid);
         console.log("vai a pagata o a controllare");
+        $scope.getIscrittiByGuid(confirmGuid);
+
     }
 
+    
     var exampleSubscriber = iscrizioneService.exampleOfIscritto();
 
     // iscrizioneService.save(exampleSubscriber);
@@ -322,17 +347,14 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
         $scope.arrayIscritti.forEach(function (t) {
             list += t.name+"_"+t.surname+";"
         })
-        return lis
-        à
-        t;
+        return list;
+        
     };
 
     $scope.save= function () {
         iscrizioneService.save($scope.arrayIscritti)
             .then(function (data) {
-                console.log(data);
-                console.log($document.getElementById("#payForm"))
-                //$document.getElementById("#payForm").submit();
+                console.log(data)
             })
             .catch(function (data) {
                 console.log(data);
