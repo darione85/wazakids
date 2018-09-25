@@ -1,3 +1,0 @@
-paypal_ipn_status = 
-paypal_ipn_date = 
-
