@@ -65,7 +65,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
     }];
 
     var exampleSubscriber = {
-        active:1,
+        active:0,
         name:"nome",
         surname:"cognome",
         mail:"pluto@pluto.it",
@@ -273,6 +273,7 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
         .then(function(data){
             $scope.gotoStep(5);
             console.log(data);
+
             $scope.confirmedAthlete = data.iscritti;
         })
     }

@@ -40,26 +40,26 @@ function saveIscritti (){
      ] */
 
    if($aoIscritti == NULL) {
-       echo "error no array passed";
-       var_dump($aoIscritti);
+       #echo "error no array passed";
+       #var_dump($aoIscritti);
    }else{
-    echo"array";
-    var_dump($aoIscritti);
-    echo"rows";
-    var_dump($aoIscritti->rows);
+    #echo"array";
+    #var_dump($aoIscritti);
+    #echo"rows";
+    #var_dump($aoIscritti->rows);
    }
 
    foreach( $aoIscritti->rows as $iscritto) {
-       echo"iscritto";
-       var_dump($iscritto);
+       #echo"iscritto";
+       #var_dump($iscritto);
        $string = 'INSERT INTO iscritti ';
        $strName='(';
        $strValue='(';
        foreach($iscritto as $key => $value){
            #$strName .= "'".$key."',";
            $strName .= $key.",";
-           echo"value";
-           var_dump($value);
+           #echo"value";
+           #var_dump($value);
            $strValue .= "'".$value."',";
        }
         $strName =rtrim($strName,",");
@@ -67,10 +67,12 @@ function saveIscritti (){
 
        $strName.=')';
        $strValue.=')';
+
+       queryBuilder($string.$strName." VALUES ".$strValue, NULL);
      }
    
    #echo $string.$strName.$strValue;
-   queryBuilder($string.$strName." VALUES ".$strValue, NULL);
+   #queryBuilder($string.$strName." VALUES ".$strValue, NULL);
 }
 
 saveIscritti();

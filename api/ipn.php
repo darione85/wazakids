@@ -1,11 +1,12 @@
 <?php namespace Listener;
 
+require("_db.php");
 
 // Set this to true to use the sandbox endpoint during testing:
 $enable_sandbox = true;
 
 // Use this to specify all of the email addresses that you have attached to paypal:
-$my_email_addresses = array("dario.rubado@gmail.com", "my_email_address2@gmail.com", "my_email_address3@gmail.com");
+$my_email_addresses = array("dario.rubado@gmail.com", "teamwaza@hotmail.it", "my_email_address3@gmail.com");
 
 // Set this to true to send a confirmation email:
 $send_confirmation_email = true;
@@ -59,6 +60,15 @@ if ($verified) {
     if ($receiver_email_found) {
         $paypal_ipn_status = "Completed Successfully";
 
+        if($_POST["custom"]){
+            $clausole = " WHERE idpagamento LIKE '".$_POST["custom"]."';";
+            $set1 = " set ipn_status = "."'".$_POST["payment_status"]."'";
+            $set1 .= " set active = 1,";
+            $set1 .= " set ipn_id = "."'".$_POST["txn_id"]."',";
+            $set1 .= " set payer_email = "."'".$_POST["payer_email"]."',";
+            $query = "UPDATE iscritti".$set1.$clausole;
+            \queryBuilder($query);
+        }
 
         // Process IPN
         // A list of variables are available here:

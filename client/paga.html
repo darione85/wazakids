@@ -15,8 +15,9 @@
         <!-- <input class="form-control" name="amount" type="hidden" value="{{sum()}}"><br> -->
         <input class="form-control" name="notify_url" type="hidden" value="http://backend.wazakids.it/api/ipn.php"><br>
         <input class="form-control" name="business" type="hidden" value="teamwaza@hotmail.it"><br>
-        <input class="form-control" type="submit" name="submit" value="Pagamento iscrizione affiliati Figmma">
+        <input class="form-control" type="submit" name="submit" ng-click="save()" value="Pagamento iscrizione affiliati Figmma">
         <input class="form-control" type="hidden" name="guid" value="{{guid}}">
+        <input name="custom" value="{{guid}}" type="hidden">
         <input class="form-control" TYPE="hidden" NAME="return" value="http://backend.wazakids.it/client/index.html?guid={{guid}}">
     </form>
 
