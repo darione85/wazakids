@@ -65,27 +65,57 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
     }];
 
     var exampleSubscriber = {
-        active:1,
+        active:0,
         name:"nome",
         surname:"cognome",
         mail:"pluto@pluto.it",
-        società:"WAZA",
+        societa:"WAZA",
         figmma:15,
         age:15,
         categoria:"",
         peso_categoria:"",
         gender:"male",
-        weight:65
+        weight:65,
+        idpagamento:"id"
     };
+    // create table iscritti(active integer,name varchar(20),surname varchar(20),mail varchar(30),societa varchar(20), figmma integer, age integer, categoria varchar(30),peso_categoria varchar(30), gender varchar(20),weight integer, idpagamento varchar(50));
 
     var ServerUrl = "http://directus.karuweb.it/api/1.1/";
+    var CockpitServerUrl = "http://directus.karuweb.it/api/1.1/";
+    var customServerUrl ="http://backend.wazakids.it/api/";
 
     function buildURL(url) {
         var ret = ServerUrl + url;
         return ret
     }
 
+    function buildCockpitURL(url) {
+        var ret = CockpitServerUrl + url;
+        return ret
+    }
+
+    function buildCustomURL(url) {
+        var ret = customServerUrl + url;
+        return ret
+    }
+
+    function guid() {
+        function s4() {
+          return Math.floor((1 + Math.random()) * 0x10000)
+            .toString(16)
+            .substring(1);
+        }
+        return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+      }
+
+    var guid = guid();
+
+
     return{
+
+        guid:function(){
+            return guid;
+        },
 
         categorie:function () {
           return categorie;
@@ -94,6 +124,8 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         exampleOfIscritto:function () {
             return exampleSubscriber;
         },
+
+        
 
         post:function (url,obj) {
             return $http
@@ -106,7 +138,43 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
                 })
         },
 
-        save:function (arrayOfAthlete){
+        postToCockpit:function(url,obj){
+            return $http
+                .post(buildCockpitURL(url),obj)
+                .then(function (res) {
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        getCustom:function (url) {
+            return $http
+                .get(buildCustomURL(url))
+                .then(function (res) {
+                    console.log(res)
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        postToCustom:function(url,obj){
+            console.log(buildCustomURL(url));
+
+            return $http
+                .post(buildCustomURL(url),obj)
+                .then(function (res) {
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
+
+        saveDirectus:function (arrayOfAthlete){
 
             if(arrayOfAthlete.length>1){
                 var obj={};
@@ -152,7 +220,34 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             //     .catch(function (res) {
             //         console.log(res)
             //     });
+        },
+
+        saveCustom:function(arrayOfAthlete){
+            if(arrayOfAthlete.length>=1){
+                var obj={};
+                obj.rows = arrayOfAthlete;
+                return this.postToCustom('saveiscritti.php',obj);
+            }  
+        },
+
+        saveCockpit:function (arrayOfAthlete) {
+            if(arrayOfAthlete.length>1){
+                var obj={};
+                obj.rows = arrayOfAthlete;
+                return this.postToCockpit('tables/atleti/rows/bulk',obj);
+            }else{
+                return this.postToCockpit('tables/atleti/rows',arrayOfAthlete[0]);
+            }
+        },
+
+        save:function (arrayOfAthlete) {
+            console.log(arrayOfAthlete);
+            arrayOfAthlete.forEach(function(item){
+                item.idpagamento = guid;
+            })
+            return this.saveCustom(arrayOfAthlete);
         }
+
     }
 
 
@@ -160,19 +255,40 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
 });
 
-iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',function ($scope,iscrizioneService) {
+iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$document','$element',function ($scope,iscrizioneService, $document,$element) {
 
     var jsonCategorie = iscrizioneService.categorie();
 
     $scope.currentStep = 1;
 
-    $scope.number =1;
+    $scope.variable={number:1};
 
     $scope.getNumber = function(num) {
         // if(num ==1)num+1
         return new Array(num);
     }
 
+    $scope.getIscrittiByGuid = function(confirmGuid){
+        iscrizioneService.getCustom("getiscritti.php?guid="+confirmGuid)
+        .then(function(data){
+            $scope.gotoStep(5);
+            console.log(data);
+
+            $scope.confirmedAthlete = data.iscritti;
+        })
+    }
+
+    if(window.location.href.indexOf('guid')>-1){
+        var url_string = window.location.href;
+        var url = new URL(url_string);
+        var confirmGuid = url.searchParams.get("guid");
+        console.log(confirmGuid);
+        console.log("vai a pagata o a controllare");
+        $scope.getIscrittiByGuid(confirmGuid);
+
+    }
+
+    
     var exampleSubscriber = iscrizioneService.exampleOfIscritto();
 
     // iscrizioneService.save(exampleSubscriber);
@@ -181,11 +297,14 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
     $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
 
     $scope.buildArrayIscritti = function () {
+        console.log("build array of iscritti: "+$scope.variable.number);
         $scope.arrayIscritti = [];
-        for(var i = 0;i<= $scope.number;i++){
+        for(var i = 0;i< $scope.variable.number;i++){
             $scope.arrayIscritti.push(angular.copy(exampleSubscriber));
         }
     };
+
+    $scope.guid = iscrizioneService.guid();
 
     $scope.sum = function () {
         var toPay=0;
@@ -230,12 +349,13 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
             list += t.name+"_"+t.surname+";"
         })
         return list;
+        
     };
 
     $scope.save= function () {
         iscrizioneService.save($scope.arrayIscritti)
             .then(function (data) {
-                console.log(data);
+                console.log(data)
             })
             .catch(function (data) {
                 console.log(data);
@@ -265,13 +385,29 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
         },
         {
             step: 5,
-            name: "Chart",
-            template: "apps/webgis/js/component/laminazione/step/chart.html"
+            name: "Conferma",
+            template: "conferma.html"
         },
     ];
 
 
+    // $scope.$on('$includeContentLoaded', function() {
+    //     if($scope.currentStep == 4){
+    //         var childFormController = $element.find('#paypalForm').eq(0).controller('form');
+    //         console.log(childFormController);
+    //         childFormController.$setPristine();
+    //     }
+    //
+    //
+    // });
+
+
     $scope.gotoStep = function(newStep) {
+        if (newStep == 2)$scope.buildArrayIscritti();
+        if (newStep == 4){
+            console.log($scope.arrayIscritti);
+        }
+
         $scope.currentStep = newStep;
     }
 
@@ -284,4 +420,15 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService',fu
     }
 
 }]);
+
+iscrizioneApp.component('paypalForm', {
+    templateUrl: 'paypalForm.html',
+    controller: function(iscrizioneService) {
+
+        this.guid = iscrizioneService.guid();
+    },
+    bindings:{
+        arrayIscritti:'<'
+    }
+});
 
