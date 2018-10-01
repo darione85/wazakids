@@ -171,11 +171,11 @@ textarea {
 
 /*! Start Type Nugget Styles */
 body {
-  background-color: #31ed82;
   font-family: 'Poppins';
   font-size: 17px;
   color: #091254;
-  line-height: 1.735; }
+  line-height: 1.735;
+  height: 100vh; }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Poppins';
@@ -199,6 +199,7 @@ h2 {
 
 h3 {
   margin-top: 1.6em;
+  margin-top: 0;
   margin-bottom: 0.6em;
   font-size: 2.25em;
   font-weight: 900;
@@ -241,9 +242,7 @@ a {
     color: #eee; }
 
 ul, ol {
-  margin-top: 1em;
-  margin-bottom: 1.5em;
-  padding-left: 1.1em; }
+  padding: 0; }
 
 li {
   margin-top: 0.5em;
@@ -291,7 +290,7 @@ label {
 
 .form-group input,
 .form-group select {
-  padding: 8px 0;
+  padding: 8px 0 8px 5px;
   order: 2;
   border: 0;
   width: 100%;
@@ -320,8 +319,8 @@ label {
       margin-top: 1px; }
   .form-group input:not(.input_search):focus,
   .form-group select:not(.input_search):focus {
-    background-image: linear-gradient(#0e1c82, #0e1c82), linear-gradient(#666666, #666666) !important;
-    background-size: 100% 3px, 100% 3px; }
+    background-image: linear-gradient(#091254, #091254), linear-gradient(#091254, #091254) !important;
+    background-size: 100% 4px, 100% 4px; }
     .form-group input:not(.input_search):focus + label,
     .form-group select:not(.input_search):focus + label {
       color: #0e1c82;
@@ -348,13 +347,14 @@ input:not([value=""]):not(.input_search) + label {
   top: 6px !important; }
 input:not([value=""]):not(.input_search):invalid, input:not([value=""]):not(.input_search):focus:invalid {
   background-image: linear-gradient(#ff0000, #ff0000), linear-gradient(#666666, #666666) !important;
-  background-size: 100% 3px, 100% 3px; }
+  background-size: 100% 4px, 100% 4px;
+  border: 3px solid #ff0000; }
 input:not([value=""]):not(.input_search):invalid + label {
   color: #ff0000; }
   input:not([value=""]):not(.input_search):invalid + label + em {
     color: #ff0000; }
 input:not([value=""]):not(.input_search):focus:valid {
-  background-image: linear-gradient(#0fa951, #0fa951), linear-gradient(#666666, #666666) !important;
+  background-image: linear-gradient(#091254, #091254), linear-gradient(#091254, #091254) !important;
   background-size: 100% 3px, 100% 3px; }
 input:not([value=""]):not(.input_search):disabled + label {
   opacity: 0.6; }
@@ -370,6 +370,8 @@ input:not([value=""]):not(.input_search):disabled + label {
 .d-flex {
   display: flex;
   align-items: center; }
+  .d-flex h6 + h4 {
+    padding: 0 1em; }
 
 .h {
   flex-direction: row;
@@ -382,21 +384,39 @@ input:not([value=""]):not(.input_search):disabled + label {
   justify-content: flex-start;
   align-items: flex-start; }
 
+.small {
+  font-size: 75%; }
+
+.wizard-navigation {
+  display: flex;
+  justify-content: center; }
+  .wizard-navigation a, .wizard-navigation div, .wizard-navigation li {
+    pointer-events: none; }
+
 .wizard-container {
   max-width: 90%;
   margin: auto;
-  padding-bottom: 5em; }
+  padding-top: 3em;
+  padding-bottom: 22em; }
+
+.wizard-header {
+  background: #60f19e;
+  padding: 3em; }
 
 .wizard-footer {
-  /* margin: 3em; */
+  margin: auto;
   position: fixed;
   bottom: 0;
-  width: 100%;
-  background: #31ed82;
+  background: #13d868;
   left: 0;
-  padding: 3em 0;
-  /* display: flex; */
+  right: 0;
+  padding: 1em 0;
+  height: 16em;
+  display: flex;
+  flex-direction: column;
   /* justify-content: space-around; */ }
+  .wizard-footer button {
+    margin: 1em; }
 
 li {
   margin: 1em;
@@ -451,8 +471,8 @@ li {
 button {
   background: #091254;
   border: 0;
-  padding: 1em 2em;
-  font-size: 2em;
+  padding: 1em 3em;
+  font-size: 1.5em;
   color: #31ed82;
   box-shadow: inset 0 0 50px 10px #070d3d;
   border-radius: 20px; }
@@ -460,5 +480,92 @@ button {
     transform: scale(1.2);
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
     background-color: #0e1c82; }
+
+.form-group.label-floating {
+  display: flex;
+  align-items: center; }
+  .form-group.label-floating input, .form-group.label-floating select {
+    order: 1;
+    flex-grow: 2;
+    max-width: 90%; }
+  .form-group.label-floating label {
+    order: 3;
+    padding-left: 1em;
+    flex-grow: 0; }
+  .form-group.label-floating i {
+    order: 2; }
+
+.collect h4 {
+  background: #8ff5bb;
+  color: #0d9246;
+  padding: 0.75em 3em !important;
+  border-radius: 3em;
+  margin-left: 1em; }
+
+@media screen and (max-width: 980px) {
+  .d-flex.c.collect {
+    flex-direction: column !important; }
+    .d-flex.c.collect .d-flex.h .d-flex.c {
+      transform: scale(0.8) !important;
+      padding: 0; } }
+@media screen and (max-width: 768px) {
+  .hidden-sm {
+    display: none; }
+
+  button, input, select, h2 {
+    font-size: 125%; }
+
+  .wizard-footer {
+    height: 190px;
+    padding: 0.6666666667em 0; }
+
+  .wizard-header {
+    padding: 0.6666666667em; }
+
+  .wizard-header, h2 {
+    margin-top: 0; }
+
+  .wizard-container {
+    /*.collect .d-flex {
+      flex-direction: inherit; justify-content: inherit; align-items: inherit;
+      &.c {flex-direction: column;}
+    }*/ }
+    .wizard-container input, .wizard-container select {
+      width: 100%; }
+    .wizard-container .row [class*="col-"] + [class*="col-"] {
+      margin: 1em 0; }
+    .wizard-container .d-flex:not(.modal-footer) {
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: flex-start; }
+      .wizard-container .d-flex:not(.modal-footer).c {
+        flex-direction: row; }
+
+  .collect h4 {
+    padding: 1em 2em !important; }
+
+  .d-flex.c.collect .d-flex.h:nth-child(1), .d-flex.c.collect .d-flex.h:nth-child(2), .d-flex.c.collect .d-flex.h:nth-child(3) {
+    flex-direction: row;
+    align-items: center; }
+  .d-flex.c.collect .d-flex.h h6, .d-flex.c.collect .d-flex.h h4 {
+    margin-top: 0; }
+  .d-flex.c.collect + .d-flex.h {
+    flex-direction: column !important; }
+    .d-flex.c.collect + .d-flex.h .d-flex.c {
+      flex-direction: row; }
+
+  .d-flex.c.collect .d-flex.h .d-flex.c {
+    align-items: center;
+    margin: 0;
+    padding: 0; } }
+@media screen and (max-width: 480px) {
+  .hidden-xs {
+    display: none; }
+
+  button .small, .nav-pills > li > a .small {
+    display: none; }
+
+  button, input, select, h2 {
+    font-size: 95%; } }
 
 /*# sourceMappingURL=css.css.map */

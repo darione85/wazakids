@@ -1,10 +1,10 @@
 
 
 <div ng-repeat="iscritto in arrayIscritti track by $index" >
-    <h3 class="text-center">Atleta numero <span class="badge">{{$index+1}}</span></h3>
+    <h3 class="text-center d-flex h">Atleta numero <span class="badge">{{$index+1}}</span></h3>
     <div class="row d-flex h">
         <div class="col-sm-6">
-            <div class="form-group label-floating">
+            <div class="form-group label-floating d-flex c">
                 <input class="form-control" type="text" ng-model="iscritto.name">
                 <span class="highlight"></span>
                 <div class="bar"></div>
@@ -12,8 +12,10 @@
 
             </div>
         </div>
+    <!--</div>
+    <div class="row d-flex c">-->
         <div class="col-sm-6">
-            <div class="form-group label-floating">
+            <div class="form-group label-floating d-flex c">
                 <input class="form-control" type="text" ng-model="iscritto.surname" >
                 <span class="highlight"></span>
                 <div class="bar"></div>
@@ -65,7 +67,7 @@
             </div>
         </div>
     </div>
-    <div class="row d-flex h">
+    <div class="row d-flex c">
         <div class="col-sm-6">
             <div class="form-group label-floating">
                 <input class="form-control" type="text" ng-model="iscritto.societa">
@@ -74,18 +76,21 @@
                 <label class="control-label">Società iscrizione/provenienza<small></small></label>
             </div>
         </div>
+    </div>
+    <div class="row d-flex c">
         <div class="col-sm-6">
-            <div class="input-group d-flex ">
-                <span class="input-group-addon">
-                    <i class="material-icons">email</i>
-                </span>
-                <div class="form-group label-floating">
+            <!--<div class="input-group  ">-->
+
+                <div class="form-group label-floating ">
                     <input class="form-control" type="text" name="mail" ng-model="iscritto.mail" ng-required="true">
                     <span class="highlight"></span>
                     <div class="bar"></div>
+                    <!--<span class="input-group-addon">-->
+                        <i class="material-icons">email</i>
+                    <!--</span>-->
                     <label class="control-label">Email<small></small></label>
                 </div>
-            </div>
+            <!--</div>-->
         </div>
     </div>
 

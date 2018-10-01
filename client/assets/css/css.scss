@@ -51,11 +51,12 @@ $color_06: #ff0000;
 
 
 body {
-  background-color: $color_01;
+  //background-color: $color_01;
   font-family: 'Poppins';
   font-size: 17px;
   color: $color_02;
   line-height: 1.735;
+  height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -83,6 +84,7 @@ h2 {
 
 h3 {
   margin-top: 1.6em;
+  margin-top: 0;
   margin-bottom: 0.6em;
   font-size: 2.25em;
   font-weight: 900;
@@ -134,9 +136,11 @@ a {
 }
 
 ul, ol {
-  margin-top: 1em;
-  margin-bottom: 1.5em;
-  padding-left: 1.1em;
+  //margin-top: 1em;
+  //margin-bottom: 1.5em;
+  //padding-left: 1.1em;
+  padding: 0;
+
 }
 
 li {
@@ -202,7 +206,7 @@ label {
 
 .form-group input,
 .form-group select{
-  padding: 8px 0;
+  padding: 8px 0 8px 5px;
   order: 2;
   border: 0;
   width: 100%;
@@ -232,8 +236,8 @@ label {
   }
   &:not(.input_search) {
     &:focus {
-      background-image: linear-gradient($color_03, $color_03), linear-gradient($color_04, $color_04) !important;
-      background-size: 100% 3px, 100% 3px;
+      background-image: linear-gradient($color_02, $color_02), linear-gradient($color_02, $color_02) !important;
+      background-size: 100% 4px, 100% 4px;
       + label {
         color: $color_03;
         font-size: 13px;
@@ -265,7 +269,8 @@ input:not([value=""]):not(.input_search) {
   }
   &:invalid, &:focus:invalid {
     background-image: linear-gradient($color_06, $color_06), linear-gradient($color_04, $color_04) !important;
-    background-size: 100% 3px, 100% 3px;
+    background-size: 100% 4px, 100% 4px;
+    border:3px solid $color_06;
   }
   &:invalid + label {
     color: $color_06;
@@ -274,7 +279,7 @@ input:not([value=""]):not(.input_search) {
     }
   }
   &:focus:valid {
-    background-image: linear-gradient($color_05, $color_05), linear-gradient($color_04, $color_04) !important;
+    background-image: linear-gradient($color_02, $color_02), linear-gradient($color_02, $color_02) !important;
     background-size: 100% 3px, 100% 3px;
   }
   &:disabled + label {
@@ -286,6 +291,14 @@ input:not([value=""]):not(.input_search) {
 }
 
 
+$pad: 3em;
+$height-button: 8em;
+$height-nav: 8em;
+
+$screen-md: 980px;
+$screen-sm: 768px;
+$screen-xs: 480px;
+
 
 [class*="col-"] + [class*="col-"] {margin:0em 2em;}
 .row  + .row {margin-top:3em ;}
@@ -294,6 +307,7 @@ input:not([value=""]):not(.input_search) {
   display: flex;
   //flex-direction: row;
   align-items: center;
+  h6 + h4 {padding: 0 1em;}
 
 }
 .h {
@@ -302,90 +316,208 @@ input:not([value=""]):not(.input_search) {
 }
 .c {flex-direction: column;}
 .left {justify-content: flex-start; align-items: flex-start;}
+.small {font-size: 75%; }
 
-
-
-
-.wizard-container {max-width:90%; margin: auto; padding-bottom: 5em}
-//.wizard-footer {margin: 3em;}
-
-.wizard-footer {
-  /* margin: 3em; */
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-  background: $color_01;
-  left: 0;
-  padding: 3em 0;
-  /* display: flex; */
-  /* justify-content: space-around; */
-}
-
-
-li {
-  margin: 1em;
-  list-style: none;
-  line-height: 1;
-  text-align: center;
-  &.active {
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
-    background: $color_02;
-    padding: 10px;
-    font-size: 120%;
-    box-shadow: inset 0 0 50px 10px darken($color_02,5%);
-    box-shadow: 0 3px 10px $color_02;
-    border-radius: 5px;
-    a {
-      color: $color_01;
-    }
-
-  }
-}
-
-
-.riepilogo h4 {margin-left: 1em;}
-.material-icons {
-  font-size: 3em;
-  padding-right: 10px;
-}
-.d-flex.h>.d-flex.c{
-  padding: 1em 3em;
-  &>h4 {margin-top: 0;}
-}
-.badge {
-  $badge:50px;
-  min-width:$badge;
-  min-height: $badge;
-  background-color: $color_02;
-  color:$color_01;
-  text-align: center;
-  padding:10px; border-radius: 50%; line-height: 0;
-  transform: scale(1.2);
-  margin-left:2em;
-  overflow: hidden;
-  letter-spacing: 0;
-  line-height: 0;
-  display: inline-flex;
-  width: $badge;
-  height: $badge;
-  vertical-align: middle;
-  text-align: center;
+.wizard-navigation {
+  a, div, li {pointer-events: none;}
+  display: flex;
   justify-content: center;
-  align-items: center;
+}
+
+  .wizard-container {
+    max-width:90%; margin: auto;
+    padding-top: $pad;
+    padding-bottom: $height-button + $height-nav + ($pad * 2);
+  }
+  //.wizard-footer {margin: 3em;}
+
+  .wizard-header {
+    background: lighten($color_01, 10%);
+    padding: $pad;
+  }
+  .wizard-footer {
+    margin: auto;
+    position: fixed;
+    bottom: 0;
+    //width: 90%;
+    background: darken($color_01, 10%);
+    left: 0; right: 0;
+    padding: $pad/3 0;
+    height: $height-button + $height-nav;
+
+     display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+    button {
+      margin:1em;
+
+    }
+  }
+
+
+
+  li {
+    margin: 1em;
+    list-style: none;
+    line-height: 1;
+    text-align: center;
+    &.active {
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+      background: $color_02;
+      padding: 10px;
+      font-size: 120%;
+      box-shadow: inset 0 0 50px 10px darken($color_02,5%);
+      box-shadow: 0 3px 10px $color_02;
+      border-radius: 5px;
+      a {
+        color: $color_01;
+      }
+
+    }
+  }
+
+
+  .riepilogo h4 {margin-left: 1em;}
+  .material-icons {
+    font-size: 3em;
+    padding-right: 10px;
+  }
+  .d-flex.h>.d-flex.c{
+    padding: 1em 3em;
+    &>h4 {margin-top: 0;}
+  }
+
+  .badge {
+    $badge:50px;
+    min-width:$badge;
+    min-height: $badge;
+    background-color: $color_02;
+    color:$color_01;
+    text-align: center;
+    padding:10px; border-radius: 50%; line-height: 0;
+    transform: scale(1.2);
+    margin-left:2em;
+    overflow: hidden;
+    letter-spacing: 0;
+    line-height: 0;
+    display: inline-flex;
+    width: $badge;
+    height: $badge;
+    vertical-align: middle;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+  }
+
+
+  button {
+    background: $color_02;
+    border: 0;
+    padding: $pad/3 $pad;
+    font-size: $pad/2;
+    color: $color_01;
+    box-shadow: inset 0 0 50px 10px darken($color_02,5%);
+    border-radius: 20px;
+    &:hover, &:focus {
+      transform: scale(1.2);
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
+      background-color: lighten($color_02,10%);
+    }
+  }
+
+
+.form-group.label-floating {
+  display:flex;align-items: center;
+  input, select {order:1; flex-grow: 2; max-width: 90%;}
+  label {order:3; padding-left:1em;  flex-grow: 0; }
+  i {order:2;}
 }
 
 
-button {
-  background: $color_02;
-  border: 0;
-  padding: 1em 2em;
-  font-size: 2em;
-  color: $color_01;
-  box-shadow: inset 0 0 50px 10px darken($color_02,5%);
-  border-radius: 20px;
-  &:hover, &:focus {
-    transform: scale(1.2);
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
-    background-color: lighten($color_02,10%);
+.collect h4 {
+  background: lighten($color_01, 20%);
+  color: darken($color_01, 25%);
+  padding: $pad/4 $pad!important;
+  border-radius: $pad;
+  margin-left: 1em;
+}
+
+@media screen and (max-width: $screen-md) {
+  .d-flex.c.collect {
+    flex-direction: column !important;
+    .d-flex.h .d-flex.c {
+      transform: scale(0.8) !important;
+      padding: 0;
+    }
   }
+}
+
+@media screen and (max-width: $screen-sm) {
+  .hidden-sm {display: none;}
+  $pad: 2em;
+  $height-button: 110px;
+  $height-nav: 80px;
+  button, input, select, h2 {font-size: 125%;}
+  .wizard-footer {
+    height: $height-button + $height-nav;
+    padding: $pad/3 0;
+
+  }
+  .wizard-header { padding: $pad/3}
+  .wizard-header, h2 {
+    margin-top: 0;
+  }
+  .wizard-container {
+    input, select {width: 100%;}
+    .row [class*="col-"] + [class*="col-"] {
+      margin:1em 0 ;
+
+    }
+    .d-flex:not(.modal-footer)
+    {
+      flex-direction: column;
+      justify-content:flex-start;
+      align-items:flex-start;
+      &.c {flex-direction: row;}
+    }
+    /*.collect .d-flex {
+      flex-direction: inherit; justify-content: inherit; align-items: inherit;
+      &.c {flex-direction: column;}
+    }*/
+
+  }
+  .collect h4 {
+    padding: $pad/2 $pad!important;
+  }
+  .d-flex.c.collect {
+    .d-flex.h {
+      &:nth-child(1), &:nth-child(2), &:nth-child(3) {
+        flex-direction:row;
+        align-items:center;
+      }
+      h6, h4 {margin-top: 0;}
+    }
+    + .d-flex.h {
+      flex-direction:column!important;
+      .d-flex.c {
+        flex-direction:row;
+      }
+    }
+  }
+  .d-flex.c.collect .d-flex.h .d-flex.c {
+    align-items:center;
+    margin:0;padding:0;
+  }
+
+}
+
+
+
+@media screen and (max-width: $screen-xs) {
+  .hidden-xs {display:none;}
+  button, .nav-pills>li>a {
+    .small {display: none;}
+  }
+  button, input, select, h2 {font-size: 95%; }
+  //h2 {padding-top: 0;}
 }

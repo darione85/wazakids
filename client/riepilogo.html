@@ -3,14 +3,14 @@
 
 <!--http://directus.karuweb.it/api/1.1/tables/atleti/rows-->
 
-<div class="panel panel-default riepilogo">
+<div class="panel panel-default ">
 	<div class="panel-body">
         <div ng-repeat="iscritto in arrayIscritti track by $index">
             <h4>Atleta numero: <span class="badge">{{$index}}</span></h4>
 
             <br>
 
-            <div class="d-flex c left">
+            <div class="d-flex c left collect">
                 <div class="d-flex h ">
                     <h6 class="control-label">Nome:</h6>
                     <h4 >{{iscritto.name}}</h4>
@@ -52,8 +52,8 @@
                 </div>
 
             </div>
-            <div>
-                <h2>Totale da pagare : <span class="badge">{{sum()}}</span></h2>
+            <div class="price d-flex h">
+                <h3>Totale da pagare:</h3> <h3><span class="badge" style="padding: 30px">{{sum()}}</span></h3>
             </div>
 
 
