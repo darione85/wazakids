@@ -156,7 +156,7 @@ li {
 form {
   //height: 70px;
   margin: 0 auto;
-  max-width: 75vw;
+  //max-width: 75vw;
   position: relative;
   //margin-top: 100px;
 }
@@ -186,6 +186,14 @@ input, select {
     max-width: 150px;
     text-align: center;
   }
+  &.form-control[type="submit"] {
+    max-width:50%;
+  }
+  &.form-control[value*=" "] {
+    display: flex;
+    flex-wrap: wrap;
+    white-space: pre-wrap;
+  }
 }
 
 label {
@@ -202,7 +210,14 @@ label {
   position: absolute;
 }
 
-
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  /* width: 100%; */
+  align-items: center;
+  //margin-top: 5em;
+}
 
 .form-group input,
 .form-group select{
@@ -325,7 +340,9 @@ $screen-xs: 480px;
 }
 
   .wizard-container {
-    max-width:90%; margin: auto;
+    //max-width:90%;
+    width:100%;
+    margin: auto;
     padding-top: $pad;
     padding-bottom: $height-button + $height-nav + ($pad * 2);
   }
@@ -355,6 +372,12 @@ $screen-xs: 480px;
   }
 
 
+.iscritto {
+  padding:2em 1em;
+  //width: 100%;
+  &:nth-child(odd) {background-color:darken($color_01,7%);}
+  &:nth-child(even) {background-color:darken($color_01,12%);;}
+}
 
   li {
     margin: 1em;
@@ -383,7 +406,7 @@ $screen-xs: 480px;
     padding-right: 10px;
   }
   .d-flex.h>.d-flex.c{
-    padding: 1em 3em;
+    //padding: 1em 3em;
     &>h4 {margin-top: 0;}
   }
 
@@ -410,7 +433,7 @@ $screen-xs: 480px;
   }
 
 
-  button {
+  button, input[type="submit"] {
     background: $color_02;
     border: 0;
     padding: $pad/3 $pad;
@@ -421,7 +444,7 @@ $screen-xs: 480px;
     &:hover, &:focus {
       transform: scale(1.2);
       transition: all 0.3s cubic-bezier(0.175, 0.885, 0.22, 1.275);
-      background-color: lighten($color_02,10%);
+      background-color: lighten($color_02, 10%);
     }
   }
 
@@ -442,15 +465,43 @@ $screen-xs: 480px;
   margin-left: 1em;
 }
 
+.iscritto.collect .row.d-flex.h>.d-flex.c {    align-items: flex-start;  }
+
 @media screen and (max-width: $screen-md) {
+  body .iscritto {font-size: 80%;}
   .d-flex.c.collect {
-    flex-direction: column !important;
+    flex-direction: column ;
     .d-flex.h .d-flex.c {
-      transform: scale(0.8) !important;
+      transform: scale(0.8);
       padding: 0;
     }
   }
 }
+
+.paga input[type="submit"] {
+  background: yellow;
+  color:$color_02;
+  box-shadow: 0 0 0 0 rgba(yellow, .5);
+  -webkit-animation: pulse 1.5s infinite;
+  &:hover, &:focus {
+    -webkit-animation: none;
+  }
+}
+
+@-webkit-keyframes pulse {
+  0% {
+    transform: scale(.95);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 50px rgba(yellow, 0);
+  }
+  100% {
+    transform: scale(.95);
+    box-shadow: 0 0 0 0 rgba(yellow, 0);
+  }
+}
+
 
 @media screen and (max-width: $screen-sm) {
   .hidden-sm {display: none;}
@@ -473,17 +524,17 @@ $screen-xs: 480px;
       margin:1em 0 ;
 
     }
-    .d-flex:not(.modal-footer)
-    {
+    .d-flex:not(.modal-footer),
+    .d-flex:not(.paga),
+    .d-flex:not(.price) {
       flex-direction: column;
       justify-content:flex-start;
       align-items:flex-start;
-      &.c {flex-direction: row;}
+      &.c {
+        flex-direction: row; align-items: center; justify-content: space-between;
+        //width: 100%;
+      }
     }
-    /*.collect .d-flex {
-      flex-direction: inherit; justify-content: inherit; align-items: inherit;
-      &.c {flex-direction: column;}
-    }*/
 
   }
   .collect h4 {
@@ -498,7 +549,7 @@ $screen-xs: 480px;
       h6, h4 {margin-top: 0;}
     }
     + .d-flex.h {
-      flex-direction:column!important;
+      flex-direction:column;
       .d-flex.c {
         flex-direction:row;
       }
@@ -508,6 +559,18 @@ $screen-xs: 480px;
     align-items:center;
     margin:0;padding:0;
   }
+  .wizard-container .title.d-flex,
+  .wizard-container .price.d-flex,
+  .wizard-container .paga.d-flex {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center!important;
+    width: 100%;
+    input[type="submit"] { padding:10px;}
+  }
+  //.wizard-container .price.d-flex {}
+  .wizard-container .iscritto.collect .d-flex.c .d-flex.c {flex-direction: column;justify-content: center;}
+
 
 }
 
@@ -519,5 +582,6 @@ $screen-xs: 480px;
     .small {display: none;}
   }
   button, input, select, h2 {font-size: 95%; }
-  //h2 {padding-top: 0;}
+  .wizard-container .d-flex:not(.modal-footer).c, .wizard-container .d-flex:not(.paga).c {flex-direction: column; align-items: flex-start;}
+  .d-flex.h > .d-flex.c {padding: 20px 1em;}
 }
