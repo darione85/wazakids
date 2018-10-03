@@ -125,7 +125,17 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
             return exampleSubscriber;
         },
 
-        
+        getIscritti:function(url){
+            return $http
+                .get(buildCustomURL(url))
+                .then(function (res) {
+                    console.log(res)
+                    return res.data;
+                })
+                .catch(function (res) {
+                    return res.data;
+                })
+        },
 
         post:function (url,obj) {
             return $http
@@ -432,3 +442,9 @@ iscrizioneApp.component('paypalForm', {
     }
 });
 
+iscrizioneApp.controller('admController',['$scope','iscrizioneService','$document','$element',function ($scope,iscrizioneService, $document,$element) {
+    iscrizioneService.getIscritti('getiscritti.php').then(function(data){
+        console.log(data);
+        $scope.iscritti = data.iscritti;
+    });
+}]);
