@@ -331,23 +331,37 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     };
 
     $scope.getCategory = function (iscritto) {
-        jsonCategorie.forEach(function (categoria) {
-            if(iscritto.age >= categoria.age_min && iscritto.age <= categoria.age_max && iscritto.gender == categoria.gender) iscritto.categoria = categoria.name;
+        
+        $scope.arrayIscritti.forEach(function(iscritto){
+            jsonCategorie.forEach(function (categoria) {
+                if(iscritto.age >= categoria.age_min && iscritto.age <= categoria.age_max && iscritto.gender == categoria.gender) iscritto.categoria = categoria.name;
+            })
+            $scope.getCategoryClass(iscritto);
         })
-        $scope.getCategoryClass(iscritto);
+
+        
 
     };
 
     $scope.getCategoryClass = function (iscritto) {
         jsonCategorie.forEach(function (categoria) {
+            var trigger = true;
             if (iscritto.categoria == categoria.name && iscritto.gender == categoria.gender){
                 categoria.weight.forEach(function (t,index,array) {
-                    if (t.indexOf("+")){
+                    console.log(t);
+
+                    if (t.indexOf("+")>-1){
+                        console.log(""+t)
                         var weight = parseInt(t.split('+')[0])+parseInt(t.split('+')[1]);
                     }else{
-                        var weight = parseInt(t.weight);
+                        console.log(""+t)
+                        var weight = parseInt(t);
                     }
-                    if(parseFloat(iscritto.weight)< weight) iscritto.weightClass = t;
+                    
+                    if((parseFloat(iscritto.weight)< weight)&&(trigger)) {
+                        iscritto.peso_categoria = t;
+                        trigger= false;
+                    }
                 })
             }
         })
@@ -414,6 +428,7 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
 
     $scope.gotoStep = function(newStep) {
         if (newStep == 2)$scope.buildArrayIscritti();
+        if (newStep == 3)$scope.getCategory()
         if (newStep == 4){
             console.log($scope.arrayIscritti);
         }
