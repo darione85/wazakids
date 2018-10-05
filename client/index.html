@@ -38,47 +38,63 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
+        <div class="wizard-header">
+            <h3 class="wizard-title">Iscrizione Atleta {{title}} </h3>
+            <!--<h5> scrizione atleta </h5>-->
+            <!--<div class="wizard-navigation">
+                <ul class="nav nav-pills d-flex h">
+                    <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}" >
+                        <a ng-click="gotoStep(step.step)" href="" >
+                            <div class="d-flex c">
+                                <span >{{step.step}}. </span>
+                                <span class="small">{{step.name}}</span>
+                            </div>
+                        </a>
+                    </li>
+                    </li>
+                </ul>
+
+            </div>-->
+        </div>
+        <!--<div class="col-sm-8 col-sm-offset-2">-->
             <!-- Wizard container -->
             <div class="wizard-container">
                 <div class="card wizard-card" data-color="purple" id="wizard">
-                    <form action="" method="" >
                         <!--        You can switch " data-color="blue" "  with one of the next bright colors: "green", "orange", "red", "purple"             -->
-
-                        <div class="wizard-header">
-                            <h3 class="wizard-title">Wizard {{title}} </h3>
-                            <h5> scrizione atleta </h5>
-                        </div>
-                        <div class="wizard-navigation">
-                            <ul class="nav nav-pills d-flex h">
-                                <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}" >
-                                    <a ng-click="gotoStep(step.step)" href="" >{{step.step}}. {{step.name}}</a>
-                                </li>
-                            </li>
-                        </ul>
-
-                        </div>
-                    </form>
+                    <form action="" method="" >
                         <div id="wizard-content-container " class="jumbotron">
                             <ng-include src="getStepTemplate()"></ng-include>
                         </div>
-
-
-                    <div class="wizard-footer">
-                        <div class="modal-footer d-flex h">
-                            <!--<button class="btn btn-warning" type="button" ng-click="closePopup()">Cancel</button>-->
-                            <button ng-disabled="currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="gotoStep(currentStep - 1)">
-                                <i class="fa fa-arrow-left"></i> Previous step
-                            </button>
-                            <button ng-disabled="currentStep >= steps.length" class="btn btn-primary" name="next" type="button" ng-click="gotoStep(currentStep + 1)">
-                                Next step <i class="fa fa-arrow-right"></i>
-                            </button>
-
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
+        <!--</div>-->
+        <div class="wizard-footer">
+            <div class="wizard-navigation">
+                <ul class="nav nav-pills d-flex h">
+                    <li ng-repeat="step in steps" ng-class="{'active':step.step == currentStep}" >
+                        <a ng-click="gotoStep(step.step)" href="" >
+                            <div class="d-flex c">
+                                <span >{{step.step}}. </span>
+                                <span class="small">{{step.name}}</span>
+                            </div>
+                        </a>
+                    </li>
+                </ul>
+
+            </div>
+            <div class="modal-footer d-flex h">
+                <!--<button class="btn btn-warning" type="button" ng-click="closePopup()">Cancel</button>-->
+                <button ng-disabled="currentStep <= 1" class="btn btn-default" name="previous" type="button" ng-click="gotoStep(currentStep - 1)">
+                    <i class="fa fa-arrow-left"></i> <span class="small">Previous <span class="hidden-xs hidden-sm">step</span></span>
+                </button>
+                <button ng-disabled="currentStep >= steps.length" class="btn btn-primary" name="next" type="button" ng-click="gotoStep(currentStep + 1)">
+                    <span class="small">Next <span class="hidden-xs hidden-sm">step</span> </span><i class="fa fa-arrow-right"></i>
+                </button>
+
+            </div>
         </div>
+
     </div>
 </div>
 
