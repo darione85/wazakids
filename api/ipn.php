@@ -62,12 +62,13 @@ if ($verified) {
 
         if($_POST["custom"]){
             $clausole = " WHERE idpagamento LIKE '".$_POST["custom"]."';";
-            $set1 = " set ipn_status = "."'".$_POST["payment_status"]."'";
-            $set1 .= " set active = 1,";
-            $set1 .= " set ipn_id = "."'".$_POST["txn_id"]."',";
-            $set1 .= " set payer_email = "."'".$_POST["payer_email"]."',";
+            $set1 = " set ipn_status = "."'".$_POST["payment_status"]."',";
+            $set1 .= " active = 1,";
+            $set1 .= " ipn_id = "."'".$_POST["txn_id"]."',";
+            $set1 .= " payer_email = "."'".$_POST["payer_email"]."' ";
             $query = "UPDATE iscritti".$set1.$clausole;
             \queryBuilder($query);
+            $data_text .=$query. "\r\n";
         }
 
         // Process IPN
