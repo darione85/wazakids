@@ -345,23 +345,24 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
 
     $scope.getCategoryClass = function (iscritto) {
         jsonCategorie.forEach(function (categoria) {
-            var trigger = true;
+            
             if (iscritto.categoria == categoria.name && iscritto.gender == categoria.gender){
+                var trigger = true;
+                var fPesoIscritto = parseFloat(iscritto.weight);
                 categoria.weight.forEach(function (t,index,array) {
-                    console.log(t);
+                    
+                    var weight = parseFloat(t);
 
-                    if (t.indexOf("+")>-1){
-                        console.log(""+t)
-                        var weight = parseInt(t.split('+')[0])+parseInt(t.split('+')[1]);
+                    console.log(fPesoIscritto+":"+weight)
+                    
+                    
+                    if( fPesoIscritto > weight && array[index+1]) {
+                        iscritto.peso_categoria = array[index+1];
                     }else{
-                        console.log(""+t)
-                        var weight = parseInt(t);
+                        //iscritto.peso_categoria = t;
                     }
                     
-                    if((parseFloat(iscritto.weight)< weight)&&(trigger)) {
-                        iscritto.peso_categoria = t;
-                        trigger= false;
-                    }
+                    
                 })
             }
         })
