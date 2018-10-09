@@ -62,7 +62,21 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         age_max:17,
         gender:"female",
         weight:["36","40","46","52","56","60+6"]
-    }];
+    }
+    ,{
+        name:"Fuori Categoria",
+        age_min:18,
+        age_max:99,
+        gender:"female",
+        weight:["+76"]
+    },{
+        name:"Fuori Categoria",
+        age_min:18,
+        age_max:99,
+        gender:"male",
+        weight:["36","40","46","52","56","60+6"]
+    }
+];
 
     var exampleSubscriber = {
         active:0,
