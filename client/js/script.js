@@ -82,14 +82,14 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         active:0,
         name:"nome",
         surname:"cognome",
-        mail:"pluto@pluto.it",
+        mail:"mail ",
         societa:"WAZA",
         figmma:15,
-        age:15,
+        age:0,
         categoria:"",
         peso_categoria:"",
-        gender:"male",
-        weight:65,
+        gender:"",
+        weight:0,
         idpagamento:"id"
     };
     // create table iscritti(active integer,name varchar(20),surname varchar(20),mail varchar(30),societa varchar(20), figmma integer, age integer, categoria varchar(30),peso_categoria varchar(30), gender varchar(20),weight integer, idpagamento varchar(50));
@@ -439,11 +439,19 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     //
     //
     // });
+    $scope.validateForms= function(){
+        if($scope.arrayIscritti.length > 0){
+            $scope.arrayIscritti.forEach(function(iscritto){
 
+            })
+        }
+    };
 
     $scope.gotoStep = function(newStep) {
         if (newStep == 2)$scope.buildArrayIscritti();
-        if (newStep == 3)$scope.getCategory()
+        if (newStep == 3){
+            $scope.getCategory();
+        }
         if (newStep == 4){
             console.log($scope.arrayIscritti);
         }
