@@ -455,6 +455,7 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
         if (newStep == 4){
             console.log($scope.arrayIscritti);
         }
+        
 
         $scope.currentStep = newStep;
     }
