@@ -38,49 +38,41 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-            <!-- Wizard container -->
-            <div class="wizard-container">
-                <div class="card wizard-card" data-color="purple" id="wizard">
-                    <div id="wizard-content-container " class="jumbotron">
-                        <div class="table-responsive">
-                            <table class="table bordered">
-                                <thead>
-                                        <td>id </td>   
-                                        <td>Nome</td>  
-                                        <td>Cognome</td>
-                                        <td>Genere :</td>
-                                        <td>Età :</td>
-                                        <td>Peso :</td>
-                                        <td>Mail: </td>
-                                        <td>da Pagare</td>
-                                        <td>Societa: </td>
-                                        <td>categoria: </td>
-                                        <td>Peso di Categoria: </td>
-                                        <td>Pagamento:  (1:si - 0: no)</td>
-                                        <td>email Pagamento: </td>
-                                </thead>
-                              <tr ng-repeat="iscritto in iscritti">
-                                    <td>{{$index}}</td>   
-                                    <td>{{iscritto.name}}</td>  
-                                    <td>{{iscritto.surname}}</td>
-                                    <td>{{iscritto.gender}}</td>
-                                    <td>{{iscritto.age}}</td>
-                                    <td>{{iscritto.weight}}</td>
-                                    <td>{{iscritto.mail}}</td>
-                                    <td>{{iscritto.figmma}}</td>
-                                    <td>{{iscritto.societa}}</td>
-                                    <td>{{iscritto.categoria}}</td>
-                                    <td>{{iscritto.perso_categoria}}</td>
-                                    <td>{{iscritto.active}} </td>
-                                    <td>{{iscritto.payer_email}}</td>
-                              </tr>
-                            </table>
-                          </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+            <table class="table">
+                <thead>
+                        <td>id </td>   
+                        <td>Nome</td>  
+                        <td>Cognome</td>
+                        <td>Genere :</td>
+                        <td>Età :</td>
+                        <td>Peso :</td>
+                        <td>Mail: </td>
+                        <td>da Pagare</td>
+                        <td>Societa: </td>
+                        <td>categoria: </td>
+                        <td>Peso di Categoria: </td>
+                        <td>Pagamento: <br> (1:si - 0: no)</td>
+                        <td>email Pagamento: </td>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="iscritto in iscritti">
+                        <td>{{$index}}</td>   
+                        <td>{{iscritto.name}}</td>  
+                        <td>{{iscritto.surname}}</td>
+                        <td>{{iscritto.gender}}</td>
+                        <td>{{iscritto.age}}</td>
+                        <td>{{iscritto.weight}}</td>
+                        <td>{{iscritto.mail}}</td>
+                        <td>{{iscritto.figmma}}</td>
+                        <td>{{iscritto.societa}}</td>
+                        <td>{{iscritto.categoria}}</td>
+                        <td>{{iscritto.perso_categoria}}</td>
+                        <td>{{iscritto.active}} </td>
+                        <td>{{iscritto.payer_email}}</td>
+                    </tr>
+                </tbody>
+                
+            </table>        
     </div>
 </div>
 
