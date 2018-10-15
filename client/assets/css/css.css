@@ -411,6 +411,13 @@ input:not([value=""]):not(.input_search):disabled + label {
   margin: auto;
   padding-top: 3em;
   padding-bottom: 22em; }
+  .wizard-container .table {
+    width: 90%;
+    margin: auto; }
+    .wizard-container .table td, .wizard-container .table th {
+      padding: 1em; }
+    .wizard-container .table tr:nth-child(odd) {
+      background: #60f19e; }
 
 .wizard-header {
   background: #60f19e;
@@ -424,7 +431,6 @@ input:not([value=""]):not(.input_search):disabled + label {
   left: 0;
   right: 0;
   padding: 1em 0;
-  height: 16em;
   display: flex;
   flex-direction: column;
   /* justify-content: space-around; */ }
@@ -557,7 +563,6 @@ button, input[type="submit"] {
     font-size: 125%; }
 
   .wizard-footer {
-    height: 190px;
     padding: 0.6666666667em 0; }
 
   .wizard-header {
