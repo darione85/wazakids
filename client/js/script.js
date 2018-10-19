@@ -345,23 +345,41 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     };
 
     $scope.getCategory = function (iscritto) {
-        
+        var categoriaSelected;
         $scope.arrayIscritti.forEach(function(iscritto){
-            jsonCategorie.forEach(function (categoria) {
-                if(iscritto.age >= categoria.age_min && iscritto.age <= categoria.age_max && iscritto.gender == categoria.gender) iscritto.categoria = categoria.name;
-            })
-            $scope.getCategoryClass(iscritto);
-        })
+        if(iscritto.age<= 11){
+            
+                jsonCategorie.forEach(function (categoria) {
+                    if(iscritto.age >= categoria.age_min && iscritto.age <= categoria.age_max ){
+                        iscritto.categoria = categoria.name;
+                        categoriaSelected = categoria;
+                    }
+                })
+                
+                $scope.getCategoryClass(iscritto,categoriaSelected);
+            
+        }else{
+            
+                jsonCategorie.forEach(function (categoria) {
+                    if(iscritto.age >= categoria.age_min && iscritto.age <= categoria.age_max && iscritto.gender == categoria.gender){
+                        iscritto.categoria = categoria.name;
+                        categoriaSelected = categoria;
+                    }
+                })
+                
+                $scope.getCategoryClass(iscritto,categoriaSelected);
+            
+        }
+    })
+        
+        
 
         
 
     };
 
-    $scope.getCategoryClass = function (iscritto) {
-        jsonCategorie.forEach(function (categoria) {
-            
-            if (iscritto.categoria == categoria.name && iscritto.gender == categoria.gender){
-                var trigger = true;
+    $scope.getCategoryClass = function (iscritto,categoria) {
+
                 var fPesoIscritto = parseFloat(iscritto.weight);
                 categoria.weight.forEach(function (t,index,array) {
                     
@@ -378,8 +396,6 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
                     
                     
                 })
-            }
-        })
     };
 
     $scope.listOfAthlete = function () {
