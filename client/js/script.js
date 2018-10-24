@@ -25,12 +25,12 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         name:"fanciulli",
         age_min:6,
         age_max:7,
-        weight:[24,34,340]
+        weight:["24","34","+34"]
     },{
         name:"ragazzi",
         age_min:10,
         age_max:11,
-        weight:[30,42,420]
+        weight:["30","42","+42"]
     },{
         name:"novizi",
         age_min:12,
@@ -61,19 +61,6 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         age_min:16,
         age_max:17,
         gender:"female",
-        weight:["36","40","46","52","56","60+6"]
-    }
-    ,{
-        name:"Fuori Categoria",
-        age_min:18,
-        age_max:99,
-        gender:"female",
-        weight:["+76"]
-    },{
-        name:"Fuori Categoria",
-        age_min:18,
-        age_max:99,
-        gender:"male",
         weight:["36","40","46","52","56","60+6"]
     }
 ];
@@ -282,6 +269,7 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$document','$element',function ($scope,iscrizioneService, $document,$element) {
 
     var jsonCategorie = iscrizioneService.categorie();
+    $scope.jsonCategorie = iscrizioneService.categorie();
 
     $scope.currentStep = 1;
 
@@ -401,6 +389,49 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
             })
     }
 
+    $scope.filterCategoryByGender = function(iscritto){
+        
+        var array = [];
+
+        for(cat in jsonCategorie){
+            if(!jsonCategorie[cat].hasOwnProperty('gender')){
+                array.push(jsonCategorie[cat])
+            }else{
+                if(jsonCategorie[cat].gender == iscritto.gender){
+                    array.push(jsonCategorie[cat])
+                }
+            }
+        }
+
+        return array;
+    }
+
+    
+
+    $scope.getCategoryListByGender = function(iscritto){
+        console.log(iscritto)
+        for(cat in jsonCategorie){
+            if (jsonCategorie[cat].name == iscritto.categoria && jsonCategorie[cat].gender==iscritto.gender){
+                console.log(jsonCategorie[cat])
+                return jsonCategorie[cat].weight
+                
+            }
+        }
+    };
+
+    $scope.getCategoryWeightList = function(iscritto){
+        var array = $scope.filterCategoryByGender(iscritto)
+        for(cat in array){
+            if (array[cat].name == iscritto.categoria ){
+                console.log("load weight")
+                console.log(array[cat].weight)
+
+                return array[cat].weight
+                
+            }
+        }
+    };
+
     $scope.steps = [
         {
             step: 1,
@@ -450,7 +481,7 @@ iscrizioneApp.controller('iscrizioneController',['$scope','iscrizioneService','$
     $scope.gotoStep = function(newStep) {
         if (newStep == 2)$scope.buildArrayIscritti();
         if (newStep == 3){
-            $scope.getCategory();
+            //$scope.getCategory(); hard coded category
         }
         if (newStep == 4){
             console.log($scope.arrayIscritti);

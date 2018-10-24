@@ -68,6 +68,32 @@
                 </div>
             </div>
         </div>
+
+        <div class="row d-flex h">
+
+
+            <div class="col-sm-4">
+                <div class="form-group label-floating">                    
+                    <select ng-model="iscritto.categoria">
+                        <option ng-repeat="cat in filterCategoryByGender(iscritto)" value="{{cat.name}}">{{cat.name}}</option>
+                    </select>
+                    <span class="highlight"></span>
+                    <div class="bar"></div>
+                    <label class="control-label">Categoria<small></small></label>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group label-floating">
+                        <select ng-model="iscritto.peso_categoria">
+                                <option ng-repeat="weight in getCategoryWeightList(iscritto)" value="{{weight}}">{{weight}}</option>
+                            </select>
+                    <span class="highlight"></span>
+                    <div class="bar"></div>
+                    <label class="control-label">Peso Categoria<small></small></label>
+                </div>
+            </div>
+        </div>
+
         <div class="row d-flex c">
             <div class="col-sm-6">
                 <div class="form-group label-floating">
