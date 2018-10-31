@@ -23,8 +23,8 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
     },{
         name:"fanciulli",
-        age_min:6,
-        age_max:7,
+        age_min:8,
+        age_max:9,
         weight:["24","34","+34"]
     },{
         name:"ragazzi",

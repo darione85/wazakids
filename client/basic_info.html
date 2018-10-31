@@ -27,7 +27,7 @@
         <div class="row d-flex h">
             <div class="col-sm-6 ">
                 <div class="form-group label-floating d-flex c">
-                    <select ng-model="iscritto.gender" class="form-control">
+                    <select ng-model="iscritto.gender" class="form-control" >
                         <option value="male">Maschio</option>
                         <option value="female">Femmina</option>
                     </select>
@@ -75,7 +75,7 @@
             <div class="col-sm-4">
                 <div class="form-group label-floating">                    
                     <select ng-model="iscritto.categoria">
-                        <option ng-repeat="cat in filterCategoryByGender(iscritto)" value="{{cat.name}}">{{cat.name}}</option>
+                        <option ng-repeat="cat in filterCategoryByGender(iscritto)" value="{{cat.name}}">{{cat.name}}({{cat.age_min}}-{{cat.age_max}} anni)</option>
                     </select>
                     <span class="highlight"></span>
                     <div class="bar"></div>
