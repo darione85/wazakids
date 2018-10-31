@@ -35,33 +35,33 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
         name:"novizi",
         age_min:12,
         age_max:13,
-        weight:["27","30","34","38","42","46","50","55","60","66","72","+72"]
+        weight:["38","42","46","50","55","60","66","+66"]
     },
     {
         name:"esordienti",
         age_min:14,
         age_max:15,
         gender:"male",
-        weight:["32","35","38","42","47","53","59","66","73","+73"]
+        weight:["38","42","47","53","59","66","73","+73"]
     },
     {
         name:"esordienti",
         age_min:14,
         age_max:15,
         gender:"female",
-        weight:["30","32","34","37","40","44","48","52","57","+57"]
+        weight:["34","40","44","48","52","57","+57"]
     },{
         name:"cadetti",
         age_min:16,
         age_max:17,
         gender:"male",
-        weight:["50","54","58","63","69","76+6"]
+        weight:["50","54","58","63","69","76","85"]
     },{
         name:"cadetti",
         age_min:16,
         age_max:17,
         gender:"female",
-        weight:["36","40","46","52","56","60+6"]
+        weight:["43","49","56","60","65","+65"]
     }
 ];
 
