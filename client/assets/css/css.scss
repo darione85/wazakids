@@ -345,15 +345,6 @@ $screen-xs: 480px;
     margin: auto;
     padding-top: $pad;
     padding-bottom: $height-button + $height-nav + ($pad * 2);
-    .table {
-      width:90%;
-      margin:auto;
-      td, th {
-        padding:1em;
-      }
-      tr:nth-child(odd) {background: lighten($color_01, 10%);}
-
-    }
   }
   //.wizard-footer {margin: 3em;}
 
@@ -369,7 +360,7 @@ $screen-xs: 480px;
     background: darken($color_01, 10%);
     left: 0; right: 0;
     padding: $pad/3 0;
-    //height: $height-button + $height-nav;
+    height: $height-button + $height-nav;
 
      display: flex;
     flex-direction: column;
@@ -531,7 +522,7 @@ $screen-xs: 480px;
   $height-nav: 80px;
   button, input, select, h2 {font-size: 125%;}
   .wizard-footer {
-    //height: $height-button + $height-nav;
+    height: $height-button + $height-nav;
     padding: $pad/3 0;
 
   }

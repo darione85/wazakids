@@ -67,10 +67,10 @@ iscrizioneApp.service('iscrizioneService',function ($http) {
 
     var exampleSubscriber = {
         active:0,
-        name:"nome",
-        surname:"cognome",
-        mail:"mail ",
-        societa:"WAZA",
+        name:"Nome atleta",
+        surname:"Cognome atleta",
+        mail:"e-Mail",
+        societa:"-",
         figmma:15,
         age:0,
         categoria:"",

@@ -3,7 +3,7 @@
 require("_db.php");
 
 // Set this to true to use the sandbox endpoint during testing:
-$enable_sandbox = true;
+$enable_sandbox = false;
 
 // Use this to specify all of the email addresses that you have attached to paypal:
 $my_email_addresses = array("dario.rubado@gmail.com", "teamwaza@hotmail.it", "my_email_address3@gmail.com");
@@ -76,10 +76,10 @@ if ($verified) {
         // https://developer.paypal.com/webapps/developer/docs/classic/ipn/integration-guide/IPNandPDTVariables/
 
         // This is an example for sending an automated email to the customer when they purchases an item for a specific amount:
-        if ($_POST["item_name"] == "Example Item" && $_POST["mc_gross"] == 49.99 && $_POST["mc_currency"] == "USD" && $_POST["payment_status"] == "Completed") {
+        if ($_POST["payment_status"] == "Completed") {
             $email_to = $_POST["first_name"] . " " . $_POST["last_name"] . " <" . $_POST["payer_email"] . ">";
-            $email_subject = $test_text . "Completed order for: " . $_POST["item_name"];
-            $email_body = "Thank you for purchasing " . $_POST["item_name"] . "." . "\r\n" . "\r\n" . "This is an example email only." . "\r\n" . "\r\n" . "Thank you.";
+            $email_subject = $test_text . "Iscrizione Completata " . $_POST["item_name"];
+            $email_body = "Iscrizione al torneo WazaKids è andata a buon fine " . $_POST["item_name"] . "." . "\r\n" . "\r\n" . "." . "\r\n" . "\r\n" . "Thank you.";
             mail($email_to, $email_subject, $email_body, "From: " . $from_email_address);
         }
 
