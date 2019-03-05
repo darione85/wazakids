@@ -431,6 +431,7 @@ input:not([value=""]):not(.input_search):disabled + label {
   .wizard-footer button {
     margin: 1em; }
 
+<<<<<<< HEAD
 .media {
   object-fit: fill;
   max-width: 120px;
@@ -443,6 +444,8 @@ input:not([value=""]):not(.input_search):disabled + label {
   .manleva a {
     margin: 1em; }
 
+=======
+>>>>>>> updated
 .iscritto {
   padding: 2em 1em; }
   .iscritto:nth-child(odd) {
