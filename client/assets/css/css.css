@@ -444,7 +444,8 @@ input:not([value=""]):not(.input_search):disabled + label {
 
 .manleva {
   background-color: rgba(9, 18, 84, 0.1);
-  padding: 1em; }
+  padding: 1em;
+  border: 2px solid #31ed82; }
   .manleva a {
     margin: 1em; }
 
