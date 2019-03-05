@@ -381,6 +381,18 @@ $screen-xs: 480px;
   }
 
 
+.media {
+  object-fit: fill;
+  max-width: 120px;
+  height: auto;
+}
+.manleva {
+  background-color: rgba($color_02, 0.1);
+  padding:1em;
+  a {margin:1em;}
+}
+
+
 .iscritto {
   padding:2em 1em;
   //width: 100%;

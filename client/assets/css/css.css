@@ -437,6 +437,17 @@ input:not([value=""]):not(.input_search):disabled + label {
   .wizard-footer button {
     margin: 1em; }
 
+.media {
+  object-fit: fill;
+  max-width: 120px;
+  height: auto; }
+
+.manleva {
+  background-color: rgba(9, 18, 84, 0.1);
+  padding: 1em; }
+  .manleva a {
+    margin: 1em; }
+
 .iscritto {
   padding: 2em 1em; }
   .iscritto:nth-child(odd) {
