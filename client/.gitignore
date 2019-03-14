@@ -3,3 +3,5 @@ node_modules/
 assets/scss/
 assets/js/
 assets/img/
+waza.db
+logs

@@ -57,7 +57,7 @@
 								</thead>
 								<tbody>
 									<tr ng-repeat="iscritto in iscritti |filter:{active:1}">
-										<td>{{ $index }}</td>
+										<td>{{ $index +1 }}</td>
 										<td>{{ iscritto.name }}</td>
 										<td>{{ iscritto.surname }}</td>
 										<td>{{ iscritto.gender }}</td>
